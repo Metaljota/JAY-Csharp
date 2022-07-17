@@ -1,0 +1,14 @@
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\bin\Debug\netcoreapp3.1\Assessment 2.exe
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\bin\Debug\netcoreapp3.1\Assessment 2.deps.json
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\bin\Debug\netcoreapp3.1\Assessment 2.runtimeconfig.json
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\bin\Debug\netcoreapp3.1\Assessment 2.runtimeconfig.dev.json
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\bin\Debug\netcoreapp3.1\Assessment 2.dll
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\bin\Debug\netcoreapp3.1\Assessment 2.pdb
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\obj\Debug\netcoreapp3.1\Assessment 2.csproj.AssemblyReference.cache
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\obj\Debug\netcoreapp3.1\Assessment 2.GeneratedMSBuildEditorConfig.editorconfig
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\obj\Debug\netcoreapp3.1\Assessment 2.AssemblyInfoInputs.cache
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\obj\Debug\netcoreapp3.1\Assessment 2.AssemblyInfo.cs
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\obj\Debug\netcoreapp3.1\Assessment 2.csproj.CoreCompileInputs.cache
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\obj\Debug\netcoreapp3.1\Assessment 2.dll
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\obj\Debug\netcoreapp3.1\Assessment 2.pdb
+D:\CODIGOS\C#\Assessment\TruckAustralia\Assessment 2\obj\Debug\netcoreapp3.1\Assessment 2.genruntimeconfig.cache
