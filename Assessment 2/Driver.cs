@@ -32,40 +32,41 @@ namespace Assessment_2
 
         public void AddDemeritPoints(int newDP)
         {
-            totalDemeritPoints = newDP + totalDemeritPoints;
+            if (newDP < 0)
+            {
+                Console.WriteLine(" ");
+                Console.WriteLine("LICENCE STATUS WARNING");
+                Console.WriteLine("ERROR, enter a valid number for demerit points");
+                Console.WriteLine(" ");
+            }
 
-            if (totalDemeritPoints >= 9 && totalDemeritPoints < MaxDemeritPoints)
+            else if(newDP > 0)
             {
-                Console.WriteLine(" ");
-                Console.WriteLine("LICENCE ESTATUS WARNING");
-                Console.WriteLine("Total Demerit points: " + totalDemeritPoints);
-                Console.WriteLine("License suspension is imminent");
-                Console.WriteLine(" ");
-            }
-            else if (totalDemeritPoints < 0)
-            {
-                Console.WriteLine(" ");
-                Console.WriteLine("LICENCE ESTATUS WARNING");
-                Console.WriteLine("Total Demerit points: " + totalDemeritPoints);
-                Console.WriteLine("ERROR");
-                Console.WriteLine(" ");
-                totalDemeritPoints = 0;
-            }
-            else if (totalDemeritPoints > MaxDemeritPoints)
-            {
-                Console.WriteLine(" ");
-                Console.WriteLine("LICENCE ESTATUS WARNING");
-                Console.WriteLine("Total Demerit points: " + totalDemeritPoints);
-                Console.WriteLine("Demerit points is over the limit");
-                Console.WriteLine(" ");
-                totalDemeritPoints = 0;
+                totalDemeritPoints = newDP + totalDemeritPoints;
+                
+                if(totalDemeritPoints > MaxDemeritPoints)
+                {
+                    Console.WriteLine(" ");
+                    Console.WriteLine("LICENCE STATUS WARNING");
+                    Console.WriteLine("ERROR, New demerit points exced the maximum");
+                    Console.WriteLine(" ");
+                    totalDemeritPoints = totalDemeritPoints - newDP;
+                }
+                else if (totalDemeritPoints >= 9 && totalDemeritPoints < MaxDemeritPoints)
+                {
+                    Console.WriteLine(" ");
+                    Console.WriteLine("LICENCE STATUS WARNING");
+                    Console.WriteLine("Total Demerit points: " + totalDemeritPoints);
+                    Console.WriteLine("License suspension is imminent");
+                    Console.WriteLine(" ");
+                }
             }
 
         }
 
         public void PrintDriver()
         {
-  
+            Console.WriteLine("Driver details: ");
             Console.WriteLine("The driver " + fName + " " + lName + ", has a driver licence number: " + licence + " Contact phone number: " + phone + " Demerit points: " + totalDemeritPoints);
             Console.WriteLine(" ");
             Console.WriteLine("The driver is licenced to drive in the following states: ");

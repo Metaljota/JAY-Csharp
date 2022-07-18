@@ -22,8 +22,16 @@ namespace Assessment_2
         }
 
         public void UpDateKm(int newkm)
-        {
-            totalKm = newkm + totalKm; 
+        {           
+            if (newkm < 0)
+            {
+                Console.WriteLine("Kilometers value warning".ToUpper());
+                Console.WriteLine("ERROR, enter valid value for Km");
+            }
+            else if (newkm >= 0)
+            {
+                totalKm = newkm + totalKm;
+            }
         }
       
         public void PrintVehicle()
@@ -127,17 +135,17 @@ namespace Assessment_2
             string[] address2 = { "Street: 15 Sydney road", "City: Melbourne", "State: Victoria", "Postcode: 2740" };
             string[] states2 = { "SA :", " VIC :" };
             Driver driver2 = new Driver(258963, "Pedro", "Valdez", 0426897456, states2, address2, 5);
-            driver2.AddDemeritPoints(6);
+            driver2.AddDemeritPoints(2);
             driver2.PrintDriver();
 
-            Car car2 = new Car("Suv", "black", "leather", 4, 426789, "Toyota", "RAV4", 15000, driver2);
-            car2.UpDateKm(700);
+            Car car2 = new Car("Suv", "black", "leather", 4, 426789, "Toyota", "RAV4", 1050, driver2);
+            car2.UpDateKm(300);
             car2.ChangeColor("green");
             car2.PrintCar();
             car2.PrintVehicle();
 
             Truck truck2 = new Truck(185, 5, 6, 123456, "Mercedes", "The Actros", 23465, driver2);
-            truck2.UpDateKm(150);
+            truck2.UpDateKm(-50);
             truck2.PrintTruck();
             truck2.PrintVehicle();
 
