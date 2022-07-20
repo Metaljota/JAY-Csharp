@@ -1,5 +1,10 @@
 ﻿using System;
+//"Trucking Australia" app
+//Code Authors: Jay Sierra
+//Date: 19 July 2022
 
+//This code is use to record details of Drivers, Cars and Trucks from Trucking Australia company.
+//Functionality overview: Cars and truck kilometers can be update. Demerit points can also be update. 
 
 namespace Assessment_2
 {
@@ -11,7 +16,7 @@ namespace Assessment_2
         public string make;
         public string model;
         public int totalKm;
-        Driver theDriver;
+        public Driver theDriver;
         public Vehicle(int rego, string make, string model, int totalKm, Driver theDriver)
         {
             this.rego = rego;
@@ -25,18 +30,27 @@ namespace Assessment_2
         {           
             if (newkm < 0)
             {
-                Console.WriteLine("Kilometers value warning".ToUpper());
-                Console.WriteLine("ERROR, enter valid value for Km");
+                totalKm = totalKm + newkm;
+
+                if (totalKm < 0)
+                {
+                    totalKm = totalKm - newkm;
+                    Console.WriteLine("-------------------------------------------- ");
+                    Console.WriteLine("Kilometers value warning".ToUpper());
+                    Console.WriteLine("ERROR, Km value can not go bellow cero");
+                    Console.WriteLine("-------------------------------------------- ");
+                }
             }
+
             else if (newkm >= 0)
             {
                 totalKm = newkm + totalKm;
             }
         }
       
-        public void PrintVehicle()
+        public virtual void PrintVehicleAll() 
         {
-            Console.WriteLine("Additional details: ");
+            Console.WriteLine("Vehicle general details: ");
             Console.WriteLine("Rego is: " + rego + "." + " Make is: " + make + "." + " Model is: " + model + "." + " Km's are: " + totalKm + "km.");
         }
 
@@ -44,7 +58,7 @@ namespace Assessment_2
 
     //----------------------------------CAR-------------------------------------
 
-    class Car : Vehicle
+    class Car : Vehicle 
     {
         public string bodyType;
         public string colour;
@@ -64,13 +78,32 @@ namespace Assessment_2
             colour = newColor;
         }
 
-        public void PrintCar()
+        public override void PrintVehicleAll()
+        {
+            theDriver.PrintDriver();
+            CarSpecific();
+            base.PrintVehicleAll();
+        }
+
+        public void CarSpecific() //print specific 
         {
             Console.WriteLine(" ");
             Console.WriteLine("Car details: ");
             Console.WriteLine("Body type: " + bodyType + ", colour: " + colour + ", The upholstery: " + upholstery + ", Doors number: " + doors);
         }
-        
+
+        public void PrintGeneral()
+        {
+            base.PrintVehicleAll(); 
+            
+        }
+
+        public void SpecAndGen()
+        {
+            CarSpecific();
+            PrintGeneral();
+        }
+
     }
 
     //-----------------------------TRUCK-------------------------------------------
@@ -89,11 +122,24 @@ namespace Assessment_2
         }
 
 
-        public void PrintTruck()
+        public void TruckSpecific()
         {
             Console.WriteLine(" ");
             Console.WriteLine("Truck details: ");
-            Console.WriteLine("Maximun load: " + load + " Number of axles: " + axles + " Number of wheels: " + wheels);
+            Console.WriteLine("Maximun load: " + load + "ton." + " Number of axles: " + axles + " Number of wheels: " + wheels);
+        }
+
+        public void TruckAndGeneral()
+        {
+            TruckSpecific();
+            PrintVehicleAll();
+        }
+
+        public void PrintTruckAll()
+        {
+            theDriver.PrintDriver();
+            TruckAndGeneral();
+
         }
     }
 
@@ -107,48 +153,85 @@ namespace Assessment_2
     {
         static void Main(string[] args)
         {
+            //Driver 1, car 1, truck 1 details
             string[] address1 = { "Street: 24 Lincoln Road", "City : Melbourne", "State : Victoria ", "Postcode : 3040" };
-            string[] states1 = { "Qld :"," Vic :", " NSW", };
+            string[] states1 = { "Qld :", " Vic :", " NSW", };
             Driver driver1 = new Driver(58946, "Jack", "Sparrow", 058423645, states1, address1, 5);
-            driver1.AddDemeritPoints(0);
+            Vehicle objVehicle = new Vehicle(978564, "Ford", "Mustang", 2300, driver1);
+            Car car1 = new Car("sedan", "red", "plastic", 4, 978564, "Ford", "Mustang", 2300, driver1);
+            Truck truck1 = new Truck(200, 5, 6, 878969, "Mercedes", "Diesel", 1500, driver1);
+
+            //Driver 2, Car 2, Truck 2 details
+            string[] address2 = { "Street: 52 Herbert St", "City : Sydney", "State : New South Wales ", "Postcode : 2216" };
+            string[] states2 = { " Vic :", " NSW", "SA", "Qld" };
+            Driver driver2 = new Driver(666895, "Pedro", "Valdez", 0245789654, states2, address2, 3);
+            Vehicle objVehicle2 = new Vehicle(666888, "Toyota", "camrry", 1500, driver2);
+            Car car2 = new Car("sedan", "black", "plastic", 4, 666888, "Toyota", "camrry", 1500, driver2);
+            Truck truck2 = new Truck(170, 4, 8, 555777, "Mack", "Titan", 35000, driver2);
+
+            //------Display section------//
+
+            //Displaying driver details 
+            Console.WriteLine("==========================================");
+            Console.WriteLine("\nDisplaying driver details".ToUpper());
             driver1.PrintDriver();
 
-            Console.WriteLine(" "); //Write and read the driver file
-            Console.WriteLine("Checking driver file".ToUpper());
-            driver1.DriverFile();
+            //Displaying car specific and general 
+            Console.WriteLine("==========================================");
+            Console.WriteLine("\nDisplaying car general and specific details".ToUpper());
+            car1.SpecAndGen();
 
-            Car car1 = new Car("sedan", "red", "plastic", 4, 978564, "Ford", "Mustang", 2300, driver1);
-            car1.UpDateKm(500);
-            car1.ChangeColor("blue");
-            car1.PrintCar();
-            car1.PrintVehicle();
+            //Displaying Truck specific and general 
+            Console.WriteLine("==========================================");
+            Console.WriteLine("\nDisplaying Truck general and specific details".ToUpper());
+            truck1.TruckAndGeneral();
 
-            Truck truck1 = new Truck(200, 5, 6, 878969, "Mercedes", "Diesel", 1500, driver1);
-            truck1.PrintTruck();
-            truck1.PrintVehicle();
+            //Displaying all car details and driver 
+            Console.WriteLine(" ");
+            Console.WriteLine("==========================================");
+            Console.WriteLine("\nDisplaying all car details including driver".ToUpper());
+            car1.PrintVehicleAll();
+
+            //Displaying all Truck details and driver 
+            Console.WriteLine(" ");
+            Console.WriteLine("==========================================");
+            Console.WriteLine("\nDisplaying all truck details including driver".ToUpper());
+            truck1.PrintTruckAll();
+
+            //Making changes and displaying again
+            car1.UpDateKm(200); //updating km on car
+            driver1.AddDemeritPoints(3);//Adding demerit points 
+            car1.ChangeColor("green");//changing color on car
+            Console.WriteLine(" ");
+            Console.WriteLine("==========================================");
+            Console.WriteLine("\nMacking changes and displaying again. (200km, 3DP, green color)".ToUpper());
+            car1.PrintVehicleAll();
+
+            //Attempt ilegal changes and see warnings 
+            Console.WriteLine(" ");
+            Console.WriteLine("==========================================");
+            Console.WriteLine("\nAttempting illegal changes and displaying again. (-2600km, +10DP, -10DP, adding 2DP)".ToUpper());
+            Console.WriteLine(" ");
+            car1.UpDateKm(-2600); //updating km on car
+            driver1.AddDemeritPoints(10);//Exeding the maximun 
+            driver1.AddDemeritPoints(-10);//Going bellow cero
+            driver1.AddDemeritPoints(2);//Near to suspension 
+            car1.PrintVehicleAll();
 
             Console.WriteLine(" ");
             Console.WriteLine("==========================================");
-            Console.WriteLine("Another Driver".ToUpper());
+            Console.WriteLine("\nDecreasing demerit points and Km (-500km, -2DP)".ToUpper());
+            driver1.AddDemeritPoints(-2);
+            car1.UpDateKm(-500);
+            driver1.PrintDriver();
+            car1.PrintGeneral();
+
+
+            //Write and read file
+            Console.WriteLine(" ");
             Console.WriteLine("==========================================");
-
-            string[] address2 = { "Street: 15 Sydney road", "City: Melbourne", "State: Victoria", "Postcode: 2740" };
-            string[] states2 = { "SA :", " VIC :" };
-            Driver driver2 = new Driver(258963, "Pedro", "Valdez", 0426897456, states2, address2, 5);
-            driver2.AddDemeritPoints(2);
-            driver2.PrintDriver();
-
-            Car car2 = new Car("Suv", "black", "leather", 4, 426789, "Toyota", "RAV4", 1050, driver2);
-            car2.UpDateKm(300);
-            car2.ChangeColor("green");
-            car2.PrintCar();
-            car2.PrintVehicle();
-
-            Truck truck2 = new Truck(185, 5, 6, 123456, "Mercedes", "The Actros", 23465, driver2);
-            truck2.UpDateKm(-50);
-            truck2.PrintTruck();
-            truck2.PrintVehicle();
-
+            Console.WriteLine("\nWriting and reading driver file".ToUpper());
+            driver1.DriverFile();
 
 
         }

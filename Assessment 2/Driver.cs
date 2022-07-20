@@ -16,7 +16,7 @@ namespace Assessment_2
         public int totalDemeritPoints;
         public static int MaxDemeritPoints = 12;
         
-        public Driver(int licence, string fName, string lName, int phone, string[] states, string[] address, int totalDemeritPoints, int MaxDemeritPoints = 12)
+        public Driver(int licence, string fName, string lName, int phone, string[] states, string[] address,   int totalDemeritPoints, int MaxDemeritPoints = 12)
         {
             this.licence = licence;
             this.fName = fName;
@@ -34,10 +34,20 @@ namespace Assessment_2
         {
             if (newDP < 0)
             {
-                Console.WriteLine(" ");
-                Console.WriteLine("LICENCE STATUS WARNING");
-                Console.WriteLine("ERROR, enter a valid number for demerit points");
-                Console.WriteLine(" ");
+                totalDemeritPoints = totalDemeritPoints + newDP;
+                
+                if (totalDemeritPoints < 0)
+                {
+                    totalDemeritPoints = totalDemeritPoints - newDP;
+                    Console.WriteLine(" ");
+                    Console.WriteLine("-------------------------------------------- ");
+                    Console.WriteLine("LICENCE STATUS WARNING");
+                    Console.WriteLine("ERROR, demerit points is bellow 0");
+                    Console.WriteLine("-------------------------------------------- ");
+                    Console.WriteLine(" ");
+
+                }
+               
             }
 
             else if(newDP > 0)
@@ -47,17 +57,21 @@ namespace Assessment_2
                 if(totalDemeritPoints > MaxDemeritPoints)
                 {
                     Console.WriteLine(" ");
+                    Console.WriteLine("-------------------------------------------- ");
                     Console.WriteLine("LICENCE STATUS WARNING");
                     Console.WriteLine("ERROR, New demerit points exced the maximum");
+                    Console.WriteLine("-------------------------------------------- ");
                     Console.WriteLine(" ");
                     totalDemeritPoints = totalDemeritPoints - newDP;
                 }
                 else if (totalDemeritPoints >= 9 && totalDemeritPoints < MaxDemeritPoints)
                 {
                     Console.WriteLine(" ");
+                    Console.WriteLine("-------------------------------------------- ");
                     Console.WriteLine("LICENCE STATUS WARNING");
                     Console.WriteLine("Total Demerit points: " + totalDemeritPoints);
                     Console.WriteLine("License suspension is imminent");
+                    Console.WriteLine("-------------------------------------------- ");
                     Console.WriteLine(" ");
                 }
             }
@@ -73,7 +87,7 @@ namespace Assessment_2
             foreach (string state in states )
             {
                 Console.Write(state);
-                
+
             }
             Console.WriteLine(" ");
             Console.WriteLine(" ");
@@ -87,11 +101,13 @@ namespace Assessment_2
 
         public void DriverFile()
         {
-            string driverDetails = "The driver " + fName + " " + lName + ", has a driver licence number: " + licence + " Contact phone number: " + phone + " Demerit points: " + totalDemeritPoints;
+            string driverDetails = "The driver " + fName +  " " + lName + ", has a driver licence number: " + licence + " Contact phone number: " + phone + " Demerit points: " + totalDemeritPoints;
             File.WriteAllText("Driver.txt", driverDetails);
 
             string read = File.ReadAllText("Driver.txt");
             Console.WriteLine(read);
+
+
         }
 
     }
