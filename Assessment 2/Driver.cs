@@ -7,12 +7,12 @@ namespace Assessment_2
 {
     class Driver
     {
-        public int licence;
-        public string fName;
-        public string lName;
-        public int phone;
-        public string[] states;
-        public string[] address;
+        protected int licence;
+        protected string fName;
+        protected string lName;
+        protected int phone;
+        private string[] states;
+        private string[] address;
         public int totalDemeritPoints;
         public static int MaxDemeritPoints = 12;
         
@@ -30,9 +30,9 @@ namespace Assessment_2
         }
 
 
-        public void AddDemeritPoints(int newDP)
+        public void AddDemeritPoints(int newDP) //Method for updating demerit points 
         {
-            if (newDP < 0)
+            if (newDP < 0) //We can decrease demerit points but if the totaldemeritpoints goes bellow cero, it does not update.
             {
                 totalDemeritPoints = totalDemeritPoints + newDP;
                 
@@ -50,7 +50,7 @@ namespace Assessment_2
                
             }
 
-            else if(newDP > 0)
+            else if(newDP > 0) //adding demerit points with warning when it is between 9 and 12 and when it is over 12. 
             {
                 totalDemeritPoints = newDP + totalDemeritPoints;
                 
@@ -78,7 +78,7 @@ namespace Assessment_2
 
         }
 
-        public void PrintDriver()
+        public void PrintDriver() //Displaying the driver details 
         {
             Console.WriteLine("Driver details: ");
             Console.WriteLine("The driver " + fName + " " + lName + ", has a driver licence number: " + licence + " Contact phone number: " + phone + " Demerit points: " + totalDemeritPoints);
@@ -99,7 +99,7 @@ namespace Assessment_2
 
         }
 
-        public void DriverFile()
+        public void DriverFile() //method for writing and reading the txt file with the driver details. 
         {
             string driverDetails = "The driver " + fName +  " " + lName + ", has a driver licence number: " + licence + " Contact phone number: " + phone + " Demerit points: " + totalDemeritPoints;
             File.WriteAllText("Driver.txt", driverDetails);

@@ -12,10 +12,10 @@ namespace Assessment_2
 
     class Vehicle 
     {
-        public int rego;
-        public string make;
-        public string model;
-        public int totalKm;
+        protected int rego;
+        private string make;
+        private string model;
+        private int totalKm;
         public Driver theDriver;
         public Vehicle(int rego, string make, string model, int totalKm, Driver theDriver)
         {
@@ -26,13 +26,13 @@ namespace Assessment_2
             this.theDriver = theDriver; 
         }
 
-        public void UpDateKm(int newkm)
+        public void UpDateKm(int newkm) //Method use to add kilometres to the vehicles. 
         {           
             if (newkm < 0)
             {
                 totalKm = totalKm + newkm;
 
-                if (totalKm < 0)
+                if (totalKm < 0) //If km goes bellow cero the totalkm stay intact 
                 {
                     totalKm = totalKm - newkm;
                     Console.WriteLine("-------------------------------------------- ");
@@ -60,10 +60,10 @@ namespace Assessment_2
 
     class Car : Vehicle 
     {
-        public string bodyType;
-        public string colour;
-        public string upholstery;
-        public int doors;
+        private string bodyType;
+        private string colour;
+        private string upholstery;
+        private int doors;
         public Car(string bodyType, string colour, string upholstery, int doors, int rego, string make, string model, int totalKm, Driver theDriver)
             : base(rego, make, model, totalKm, theDriver)
         {
@@ -73,26 +73,26 @@ namespace Assessment_2
             this.doors = doors;
         }
 
-        public void ChangeColor(string newColor)
+        public void ChangeColor(string newColor) //method for change car color 
         {
             colour = newColor;
         }
 
-        public override void PrintVehicleAll()
+        public override void PrintVehicleAll() //For displaying car specific, general details and the driver 
         {
             theDriver.PrintDriver();
             CarSpecific();
             base.PrintVehicleAll();
         }
 
-        public void CarSpecific() //print specific 
+        public void CarSpecific() //display specific details of car  
         {
             Console.WriteLine(" ");
             Console.WriteLine("Car details: ");
             Console.WriteLine("Body type: " + bodyType + ", colour: " + colour + ", The upholstery: " + upholstery + ", Doors number: " + doors);
         }
 
-        public void PrintGeneral()
+        public void PrintGeneral() //display only general details 
         {
             base.PrintVehicleAll(); 
             
@@ -110,9 +110,9 @@ namespace Assessment_2
 
     class Truck : Vehicle
     {
-        public int load;
-        public int axles;
-        public int wheels;
+        private int load;
+        private int axles;
+        private int wheels;
         public Truck(int load, int axles, int wheels, int rego, string make, string model, int totalKm, Driver theDriver)
             : base(rego, make, model, totalKm, theDriver)
         {
@@ -122,20 +122,20 @@ namespace Assessment_2
         }
 
 
-        public void TruckSpecific()
+        public void TruckSpecific() //display only especific details from truck 
         {
             Console.WriteLine(" ");
             Console.WriteLine("Truck details: ");
             Console.WriteLine("Maximun load: " + load + "ton." + " Number of axles: " + axles + " Number of wheels: " + wheels);
         }
 
-        public void TruckAndGeneral()
+        public void TruckAndGeneral() //display especific and general details 
         {
             TruckSpecific();
             PrintVehicleAll();
         }
 
-        public void PrintTruckAll()
+        public void PrintTruckAll() //display all details from truck and the driver 
         {
             theDriver.PrintDriver();
             TruckAndGeneral();
@@ -218,6 +218,7 @@ namespace Assessment_2
             driver1.AddDemeritPoints(2);//Near to suspension 
             car1.PrintVehicleAll();
 
+            //Decreasing demerit points and km within the legal range 
             Console.WriteLine(" ");
             Console.WriteLine("==========================================");
             Console.WriteLine("\nDecreasing demerit points and Km (-500km, -2DP)".ToUpper());
