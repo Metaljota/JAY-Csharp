@@ -42,7 +42,7 @@ namespace Assessment_2
                     Console.WriteLine(" ");
                     Console.WriteLine("-------------------------------------------- ");
                     Console.WriteLine("LICENCE STATUS WARNING");
-                    Console.WriteLine("ERROR, demerit points is bellow 0");
+                    Console.WriteLine("ERROR, demerit points is below zero");
                     Console.WriteLine("-------------------------------------------- ");
                     Console.WriteLine(" ");
 
@@ -59,7 +59,7 @@ namespace Assessment_2
                     Console.WriteLine(" ");
                     Console.WriteLine("-------------------------------------------- ");
                     Console.WriteLine("LICENCE STATUS WARNING");
-                    Console.WriteLine("ERROR, New demerit points exced the maximum");
+                    Console.WriteLine("ERROR, New demerit points exceed the maximum");
                     Console.WriteLine("-------------------------------------------- ");
                     Console.WriteLine(" ");
                     totalDemeritPoints = totalDemeritPoints - newDP;
@@ -101,10 +101,19 @@ namespace Assessment_2
 
         public void DriverFile() //method for writing and reading the txt file with the driver details. 
         {
-            string driverDetails = "The driver " + fName +  " " + lName + ", has a driver licence number: " + licence + " Contact phone number: " + phone + " Demerit points: " + totalDemeritPoints;
-            File.WriteAllText("Driver.txt", driverDetails);
+            string[] state = states;
+            string[] item = address;
+            string aboutAddress = "\nDriver address: " + "\n";
+            string aboutStates = "\nThe driver is licenced to drive in the following states: " + "\n";
+            string driverDetails = "The driver " + fName +  " " + lName + ", has a driver licence number: " + licence + " Contact phone number: " + phone + " Demerit points: " + totalDemeritPoints + "\n";
+           
+            File.WriteAllText("C:\\Temp\\Driver.txt", driverDetails);
+            File.AppendAllText("C:\\Temp\\Driver.txt", aboutStates);
+            File.AppendAllLines("C:\\Temp\\Driver.txt", states);
+            File.AppendAllText("C:\\Temp\\Driver.txt", aboutAddress);
+            File.AppendAllLines("C:\\Temp\\Driver.txt", address);
 
-            string read = File.ReadAllText("Driver.txt");
+            string read = File.ReadAllText("C:\\Temp\\Driver.txt");
             Console.WriteLine(read);
 
 

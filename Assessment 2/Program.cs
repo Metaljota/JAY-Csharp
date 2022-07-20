@@ -37,7 +37,7 @@ namespace Assessment_2
                     totalKm = totalKm - newkm;
                     Console.WriteLine("-------------------------------------------- ");
                     Console.WriteLine("Kilometers value warning".ToUpper());
-                    Console.WriteLine("ERROR, Km value can not go bellow cero");
+                    Console.WriteLine("ERROR, Km value cannot go below zero");
                     Console.WriteLine("-------------------------------------------- ");
                 }
             }
